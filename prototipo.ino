@@ -1,11 +1,15 @@
+#include <LiquidCrystal.h>
+
 int ldrRawData;
 float resistorVoltage, ldrVoltage;
 float ldrResistance, ldrLux;
 float temp;
+LiquidCrystal lcd(12, 11, 5, 4, 3 ,2);
 
 void setup(void) {
- pinMode(8, OUTPUT);
+ lcd.begin(16, 2);
  Serial.begin(9600);  
+
 }
 
 void loop(void) {
@@ -20,19 +24,12 @@ void loop(void) {
  temp = analogRead(A5);
  temp = temp * 0.48827125;
  
- 
- Serial.print("Luminosidade: ");
- Serial.print(ldrLux);
- Serial.print(" Lux\t");
- Serial.print("Temperatura: ");
- Serial.print(temp);
- Serial.print(" °C\n");
+ lcd.print("Temp: ");
+ lcd.print(temp);
+ lcd.setCursor(0, 0);
+ lcd.print("Luz: ");
+ lcd.print(ldrLux);
+ lcd.setCursor(0, 1);
 
  delay(1000);
-
- if (ldrLux >= 10000 and temp >= 21 and temp < 26){
-  digitalWrite(8, HIGH);
- } else {
-  digitalWrite(8, LOW);
- }
 }
