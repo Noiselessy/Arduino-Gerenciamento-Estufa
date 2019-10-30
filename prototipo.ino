@@ -8,11 +8,10 @@ LiquidCrystal lcd(12, 11, 5, 4, 3 ,2);
 
 void setup(void) {
  lcd.begin(16, 2);
- Serial.begin(9600);  
-
 }
 
 void loop(void) {
+ //David Williams Formula
  ldrRawData = analogRead(A0);
  ldrRawData = analogRead(A0);
  resistorVoltage = (float)ldrRawData / 1023 * 5.0;
@@ -31,5 +30,5 @@ void loop(void) {
  lcd.print(ldrLux);
  lcd.setCursor(0, 1);
 
- delay(1000);
+ delay(300);
 }
