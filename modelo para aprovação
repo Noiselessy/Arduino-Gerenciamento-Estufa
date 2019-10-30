@@ -1,0 +1,56 @@
+#include <LiquidCrystal.h>                  // biblioteca para o funcionamento do lcd
+
+LiquidCrystal lcd(12, 11, 5, 4, 3 ,2);      //portas usadas pelo lcd
+
+int ldrRawData;                     //variável para a fórmula de LUX
+
+float resistorVoltage, ldrVoltage;  //variáveis analógicas para a fómula de LUX
+
+float ldrResistance, ldrLux;        //variáveis analógicas para a fórmula de lUX
+
+float temp;                         //variável analógica para a temperetura
+
+void setup(void) {
+
+ lcd.begin(16, 2);                           //comando inicial para ligar o lcd
+
+}
+
+void loop(void) {
+
+
+ ldrRawData = analogRead(A0);                       //
+
+ ldrRawData = analogRead(A0);                       //  FORMULA
+
+ resistorVoltage = (float)ldrRawData / 1023 * 5.0;  //    DO
+
+ ldrVoltage = 5.0 - resistorVoltage;                //   DAVID
+
+ ldrResistance = ldrVoltage/resistorVoltage * 2500; //  WILLIAMS
+ 
+ ldrLux = 12518931 * pow(ldrResistance, -1.405);    //  
+
+ 
+
+ temp = analogRead(A5);    //    DADOS
+
+ temp = analogRead(A5);    //     DE
+
+ temp = temp * 0.48827125; // TEMPERATURA
+ 
+ 
+
+ lcd.print("Temp: ") && lcd.print(temp);   //digita na tela Temp: "temperatura em tempo real".
+
+ lcd.setCursor(0, 0);                      //digita os dados anteriores começando na primera coluna e na primeira linha.
+
+ lcd.print("Luz: ") && lcd.print(ldrLux); //digita na tela Luz: "luz (dada em LUX) em tempo real
+
+ lcd.setCursor(0, 1);                      //digita os dados anteriores começando na primeira coluna e na segunda linha.
+
+
+
+ delay(300);
+
+}
